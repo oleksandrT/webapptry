@@ -1,6 +1,6 @@
 var urlsToCache_ = [
   '/',
-  '/views/app-shell.handlebars',
+  '/views/app-shell.hbs',
   '/stylesheets/style.css',
   '/images/sushi.svg',
   '/images/empty.svg',
