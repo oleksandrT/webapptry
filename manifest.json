@@ -1,0 +1,14 @@
+{
+	"name": "Sushi Hunt",
+	"short_name": "Sushi Hunt",
+	"start_url": "/",
+	"display": "standalone",
+	"orientation": "portrait",
+	"icons": [
+		{
+			"src": "images/sushi-196.png",
+			"sizes": "196x196",
+			"type": "image/png"
+		}
+	]
+}

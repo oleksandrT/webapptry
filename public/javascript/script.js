@@ -1,3 +1,11 @@
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(function(registration) {
+    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+  }).catch(function(err) {
+    console.log('ServiceWorker registration failed: ', err);
+  });
+}
+
 if (navigator.geolocation) {
   console.log('Geolocation is supported!');
 }
@@ -28,6 +36,16 @@ function get(url) {
   })
 }
 
+function gpsFail(error) {
+  // alert(error);
+  document.getElementById('lat').innerHTML = "Bad news! We cannot find you";
+  document.getElementById('no-location').style.display = 'block';
+  if (error === 1) {
+    document.getElementById('location-error').innerHTML = "Are you sure your location <br> service is switched on?";
+  } else if(error === 3) {
+    document.getElementById('location-error').innerHTML = "Location search timed out <br> we need the internet to work";
+  }
+}
 
 function emptyNone() {
   document.getElementById('empty').style.display = 'none';
@@ -53,7 +71,7 @@ function connectionFailNone() {
 
 function findLocation() {
     return new Promise(function(resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject, {maximumAge:0, timeout: 10000});
+    navigator.geolocation.getCurrentPosition(resolve, reject, {timeout: 5000});
   });
 };
 
@@ -69,18 +87,6 @@ function geoSuccess(position) {
 
   return latlng;
 };
-
-function gpsFail(error) {
-  // alert(error);
-  document.getElementById('lat').innerHTML = "Bad news! We cannot find you";
-  document.getElementById('no-location').style.display = 'block';
-  if (error === 1) {
-    document.getElementById('location-error').innerHTML = "Are you sure your location <br> service is switched on?";
-  } else if(error === 3) {
-    document.getElementById('location-error').innerHTML = "Are you moving? Hold still, <br> so we can find you!";
-  }
-}
-
 
 function geoFailure(error){
   emptyNone();
